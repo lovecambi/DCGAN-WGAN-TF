@@ -109,12 +109,7 @@ class DCGAN(object):
                 START_IDX = 0
                 for next_idx, xtrain in batched_images(START_IDX, self.batch_size):
                     START_IDX = next_idx
-                    
-#                for batch_lines in iterate_minibatches_u(datanames, self.batch_size, shuffle=True):
-#                    xtrain = [ scipy.misc.imread(batch_name) for batch_name in batch_lines ]
-#                    xtrain = np.array(xtrain).astype(np.float32) / 127.5 - 1 # batch_size x H x W x C
-#                    #xtrain = np.expand_dims(xtrain, -1) # if xtrain is bs x H x W
-                    
+                                        
                     if self.Wloss:
                         sess.run(self.d_clip)
                         
@@ -170,10 +165,6 @@ class DCGAN(object):
         num_show = min(n*n, self.batch_size)
         xg = sess.run(self.x_g) # batch_size x H x W x C
         xshow_ = np.array(xg)[:num_show,:,:,:] # num_show x H x W x C
-#        xshow_ = np.reshape(xshow_, [n, n, self.H, self.W, self.C])
-#        xshow = 0.5*(xshow+1.0)        
-#        xshow = np.transpose(xshow_, [1,2,0,3,4]) # n x H x n x W x C
-#        return xshow.reshape([-1,n*self.W, self.C]) if self.C > 1 else xshow.reshape([-1,n*self.W])
         return 0.5*(xshow_+1.0)
         
     
