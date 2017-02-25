@@ -23,7 +23,6 @@ class DCGAN(object):
     def __init__(self, img_shape, train_mode=True, model_path=None, 
                  latent_dim=100,
                  batch_size=64, d_learning_rate=1e-4, g_learning_rate=3e-4, eps=1e-8, 
-                 grad_clip='Norm',
                  Wloss=False, Bn=True, Adam=True
                  ):
                      
