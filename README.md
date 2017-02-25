@@ -1,5 +1,5 @@
 # dcgan (with wgan loss)
-TensorFlow implementation
+TensorFlow 0.12.1  implementation
 
 It currently works well on LSUN for vanilla gan loss.
 
