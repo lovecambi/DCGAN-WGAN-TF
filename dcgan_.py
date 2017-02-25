@@ -15,6 +15,9 @@ from lsun_batch import batched_images
     
     
 def ganloss(yl, c=0.99):
+    """
+    soft label
+    """
     return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(yl, c*tf.ones_like(yl)))
 
         
