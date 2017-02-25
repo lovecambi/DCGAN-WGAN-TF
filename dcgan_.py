@@ -99,9 +99,9 @@ class DCGAN(object):
             g_grads = self.g_optimizer.compute_gradients(self.g_loss, self.g_vars)
             #clip_g_grads = [(tf.clip_by_norm(grad, 5), var) for grad, var in g_grads if grad is not None]
             clip_g_grads = [(grad, var) for grad, var in g_grads if grad is not None]
-            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)          
-       
-        self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
+            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)         
+            
+       self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
         
     
     def train(self, max_epoch=10, K=5):
@@ -176,18 +176,18 @@ class DCGAN(object):
         return 0.5*(xshow_+1.0)
         
     
-    def generator(self, z):
+    def generator(self, z, Cc=128):
         with tf.variable_scope("g_deconv0",reuse=None):
-            deconv0 = deconv2d(z, [self.batch_size, 4, 4, 1024], 4, 4, 1, 1, bias=not self.Bn, padding='VALID')
+            deconv0 = deconv2d(z, [self.batch_size, 4, 4, 8*Cc], 4, 4, 1, 1, bias=not self.Bn, padding='VALID')
             deconv0 = tf.nn.relu(tcl.batch_norm(deconv0)) if self.Bn else tf.nn.relu(deconv0)
         with tf.variable_scope("g_deconv1",reuse=None):
-            deconv1 = deconv2d(deconv0, [self.batch_size, 8, 8, 512], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv1 = deconv2d(deconv0, [self.batch_size, 8, 8, 4*Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
             deconv1 = tf.nn.relu(tcl.batch_norm(deconv1)) if self.Bn else tf.nn.relu(deconv1)
         with tf.variable_scope("g_deconv2",reuse=None):
-            deconv2 = deconv2d(deconv1, [self.batch_size, 16, 16, 256], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv2 = deconv2d(deconv1, [self.batch_size, 16, 16, 2*Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
             deconv2 = tf.nn.relu(tcl.batch_norm(deconv2)) if self.Bn else tf.nn.relu(deconv2)
         with tf.variable_scope("g_deconv3",reuse=None):
-            deconv3 = deconv2d(deconv2, [self.batch_size, 32, 32, 128], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv3 = deconv2d(deconv2, [self.batch_size, 32, 32, Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
             deconv3 = tf.nn.relu(tcl.batch_norm(deconv3)) if self.Bn else tf.nn.relu(deconv3)
         with tf.variable_scope("g_deconv4",reuse=None):
             deconv4 = deconv2d(deconv3, [self.batch_size, 64, 64, 3], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
