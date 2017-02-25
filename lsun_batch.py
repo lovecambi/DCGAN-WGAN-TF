@@ -14,6 +14,7 @@ import scipy.misc
 DB_PATH = './data/lsun/bedroom_train_lmdb'
 DISCRIMIN_BATCH = 128
 
+
 def load_image(val):
     """LSUN images are stored as bytes of JPEG representation.
     This function converts those bytes into a a 3D tensor 
@@ -41,6 +42,7 @@ def iterate_images(start_idx=None):
                     if start_idx is None or start_idx <= i:
                         yield i, load_image(val)
 
+                        
 def batched_images(start_idx=None):
     """Yields pairs (start_idx_of_next_batch, batch). 
     Every batch is of shape (DISCRIMIN_BATCH, 64, 64, 3)"""
