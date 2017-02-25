@@ -128,7 +128,7 @@ class DCGAN(object):
                         _, Lg = sess.run([self.g_optimizer, self.g_loss],feed_dict={self.x_r: xtrain})
 
                     if k % 1000 == 0:
-                        print("Epoch=%d: Ld: %f Lg: %f" % (epoch, Ld, Lg))
+                        print("Iter=%d: Ld: %f Lg: %f" % (k, Ld, Lg))
                 
                         xshow = self.get_showimages(sess)
                         out_file = os.path.join("output_dcgan","dcgan_"+str(int(k/10000))+".npy")
