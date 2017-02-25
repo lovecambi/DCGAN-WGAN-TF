@@ -16,7 +16,8 @@ from lsun_batch import batched_images
     
 def ganloss(yl, c=0.99):
     """
-    soft label
+    input is the logits
+    c is soft label
     """
     return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(yl, c*tf.ones_like(yl)))
 
@@ -28,7 +29,7 @@ class DCGAN(object):
                  batch_size=64, d_learning_rate=1e-4, g_learning_rate=3e-4, eps=1e-8, 
                  Wloss=False, Bn=True, Adam=True
                  ):
-                     
+                       
         self.img_shape = img_shape
         self.train_mode = train_mode
         self.model_path = model_path
