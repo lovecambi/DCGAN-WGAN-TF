@@ -13,7 +13,6 @@ def linear(x, output_dim):
     """
     x : batch_size * input_dim
     affine transformation Wx+b
-    assumes x.shape = (batch_size, num_features)
     """
     input_dim = x.get_shape().as_list()[1]
     thres = np.sqrt(6.0 / (input_dim + output_dim))
