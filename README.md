@@ -9,6 +9,6 @@ After 1.5 Epoch:
 
 ![DCGAN with BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_BN1.5ep.jpg)
 
-After 1 Epoch without BN:
+After 1 Epoch without Batch Normalization:
 
 ![DCGAN no BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_noBN1ep.jpg)
