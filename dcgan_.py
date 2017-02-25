@@ -10,7 +10,7 @@ import tensorflow.contrib.layers as tcl
 import numpy as np
 import os
 
-from ops import deconv2d, conv2d, lrelu
+from ops_ import deconv2d, conv2d, lrelu
 from lsun_batch import batched_images
     
     
