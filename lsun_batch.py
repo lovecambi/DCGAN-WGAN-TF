@@ -3,6 +3,8 @@
 Created on Mon Feb 13 17:24:35 2017
 
 @author: fankai
+
+modified from https://github.com/nivwusquorum/tf-adversarial/blob/master/Adversarial-LSUN.ipynb
 """
 
 from PIL import Image
