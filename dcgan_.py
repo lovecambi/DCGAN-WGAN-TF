@@ -29,6 +29,11 @@ class DCGAN(object):
                  batch_size=64, d_learning_rate=1e-4, g_learning_rate=3e-4, eps=1e-8, 
                  Wloss=False, Bn=True, Adam=True
                  ):
+        """
+        Wloss: true for using loss introduced in WGAN; default is vanilla GAN loss
+        Bn:    true for using batch normalization (also indicates no bias)
+        Adam:  true for using Adam optimizer; false for using rmsprop
+        """
                        
         self.img_shape = img_shape
         self.train_mode = train_mode
