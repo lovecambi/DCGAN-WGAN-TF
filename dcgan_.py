@@ -86,13 +86,13 @@ class DCGAN(object):
             clip_d_grads = [(grad, var) for grad, var in d_grads if grad is not None]
             self.d_optimizer = self.d_optimizer.apply_gradients(clip_d_grads)
             
-            self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
-            
             self.g_optimizer = tf.train.RMSPropOptimizer(g_learning_rate, decay=0.99, epsilon=eps)
             g_grads = self.g_optimizer.compute_gradients(self.g_loss, self.g_vars)
             #clip_g_grads = [(tf.clip_by_norm(grad, 5), var) for grad, var in g_grads if grad is not None]
             clip_g_grads = [(grad, var) for grad, var in g_grads if grad is not None]
-            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)                
+            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)          
+       
+        self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
         
     
     def train(self, max_epoch=10, K=5):
