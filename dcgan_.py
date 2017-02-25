@@ -111,7 +111,7 @@ class DCGAN(object):
             saver = tf.train.Saver()
             sess.run(tf.global_variables_initializer())     
                         
-            k = 0
+            i, giter = 1, 0 # i is initialized as 1 to make sure no update G at first iteration  
             for epoch in range(max_epoch):
                 
                 START_IDX = 0
@@ -122,25 +122,25 @@ class DCGAN(object):
                         sess.run(self.d_clip)
                         
                     _, Ld = sess.run([self.d_optimizer, self.d_loss],feed_dict={self.x_r: xtrain})
-                    k += 1
+                    i += 1
                     
                     if self.Wloss:                    
-                        if k < 2500 or k % 2500 <= 100:
+                        if giter < 25 or giter % 500 == 0:
                             GK = 100
                         else:
                             GK = K
     
-                        if (k % GK) == 0:
+                        if i % GK == 0:
                             _, Lg = sess.run([self.g_optimizer, self.g_loss],feed_dict={self.x_r: xtrain})
-
+                            giter += 1
                     else:
                         _, Lg = sess.run([self.g_optimizer, self.g_loss],feed_dict={self.x_r: xtrain})
 
-                    if k % 1000 == 0:
-                        print("Iter=%d: Ld: %f Lg: %f" % (k, Ld, Lg))
+                    if i % 1000 == 0:
+                        print("Iter=%d: Ld: %f Lg: %f" % (i, Ld, Lg))
                 
                         xshow = self.get_showimages(sess)
-                        out_file = os.path.join("output_dcgan","dcgan_"+str(int(k/10000))+".npy")
+                        out_file = os.path.join("output_dcgan","dcgan_"+str(int(i/10000))+".npy")
                         np.save(out_file, xshow)
                         
                 self.save_model(saver, sess, step=epoch)
@@ -149,7 +149,7 @@ class DCGAN(object):
             out_file = os.path.join("output_dcgan","dcgan_end.npy")
             np.save(out_file, xshow)
  
-           
+
     def save_model(self, saver, sess, step):
         """
         save model with path error checking
