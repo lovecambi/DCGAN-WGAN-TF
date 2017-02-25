@@ -9,7 +9,7 @@ import tensorflow as tf
 import numpy as np
 import math
 
-def linear(x, output_dim):
+def linear(x, output_dim, name='linear'):
     """
     x : batch_size * input_dim
     affine transformation Wx+b
