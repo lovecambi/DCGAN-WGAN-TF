@@ -99,9 +99,9 @@ class DCGAN(object):
             g_grads = self.g_optimizer.compute_gradients(self.g_loss, self.g_vars)
             #clip_g_grads = [(tf.clip_by_norm(grad, 5), var) for grad, var in g_grads if grad is not None]
             clip_g_grads = [(grad, var) for grad, var in g_grads if grad is not None]
-            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)         
+            self.g_optimizer = self.g_optimizer.apply_gradients(clip_g_grads)   
             
-       self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
+        self.d_clip = [tf.assign(var, tf.clip_by_value(var, -0.01, 0.01)) for var in self.d_vars]
         
     
     def train(self, max_epoch=10, K=5):
