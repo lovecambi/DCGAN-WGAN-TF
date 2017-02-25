@@ -7,4 +7,8 @@ It currently works well on LSUN for vanilla gan loss.
 
 After 1.5 Epoch:
 
-![DCGAN wit BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_BN1.5ep.jpg)
+![DCGAN with BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_BN1.5ep.jpg)
+
+After 1 Epoch without BN:
+
+![DCGAN no BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_noBN1ep.jpg)
