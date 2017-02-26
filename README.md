@@ -23,7 +23,7 @@ After 1.5 Epoch with Batch Normalization:
 
 ![DCGAN with BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_BN1.5ep.jpg)
 
-After 1 Epoch without Batch Normalization (but conv and deconv with bias):
+After 1 Epoch without Batch Normalization (but conv and deconv with bias; if no bias, the generated image is still sharp but less light):
 
 ![DCGAN no BN](https://github.com/lovecambi/DCGAN/blob/master/imgs/dcgan_noBN1ep.jpg)
 
