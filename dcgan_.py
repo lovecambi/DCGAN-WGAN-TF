@@ -25,7 +25,7 @@ def ganloss(yl, c=0.99):
 class DCGAN(object):
     
     def __init__(self, img_shape, train_mode=True, model_path=None, 
-                 latent_dim=100,
+                 latent_dim=100, noise='uniform',
                  batch_size=64, d_learning_rate=1e-4, g_learning_rate=3e-4, eps=1e-8, 
                  Wloss=False, Bn=True, Adam=True
                  ):
@@ -52,9 +52,12 @@ class DCGAN(object):
         # build model
         self.DO_SHARE = None
         self.x_r = tf.placeholder(tf.float32, shape=[self.batch_size] + list(self.img_shape))
-                
-#        z = tf.random_normal((self.batch_size, 1, 1, self.z_size), 0, 1)
-        z = tf.random_uniform((self.batch_size, 1, 1, self.z_size), -1, 1)
+        
+        if noise == 'normal':
+            z = tf.random_normal((self.batch_size, 1, 1, self.z_size), 0, 1)
+        elif noise == 'uniform':
+            z = tf.random_uniform((self.batch_size, 1, 1, self.z_size), -1, 1)
+        
         self.x_g = self.generator(z)       
         
         if self.Bn:               
