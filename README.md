@@ -30,4 +30,5 @@ After 1 Epoch without Batch Normalization (but with bias; if no bias, the genera
 ## Results of WGAN Loss
 
 After 4 Epochs with Batch Normalization:
+
 ![WGAN with BN](https://github.com/lovecambi/DCGAN/blob/master/imgs/WGAN_BN4ep.jpg)
