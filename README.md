@@ -5,8 +5,8 @@ It currently works well on LSUN for vanilla gan loss.
 
 To run WGAN, set 
 ```
-d_learningrate=1e-5
-g_learningrate=1e-5
+d_learningrate=5e-5
+g_learningrate=5e-5
 Wloss=True
 Adam=False
 noise='normal'
