@@ -176,36 +176,36 @@ class DCGAN(object):
         return 0.5*(xshow_+1.0)
         
     
-    def generator(self, z, Cc=128):
+    def generator(self, z, Cc=128, f_h=5, f_w=5):
         with tf.variable_scope("g_deconv0",reuse=None):
             deconv0 = deconv2d(z, [self.batch_size, 4, 4, 8*Cc], 4, 4, 1, 1, bias=not self.Bn, padding='VALID')
             deconv0 = tf.nn.relu(tcl.batch_norm(deconv0)) if self.Bn else tf.nn.relu(deconv0)
         with tf.variable_scope("g_deconv1",reuse=None):
-            deconv1 = deconv2d(deconv0, [self.batch_size, 8, 8, 4*Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv1 = deconv2d(deconv0, [self.batch_size, 8, 8, 4*Cc], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
             deconv1 = tf.nn.relu(tcl.batch_norm(deconv1)) if self.Bn else tf.nn.relu(deconv1)
         with tf.variable_scope("g_deconv2",reuse=None):
-            deconv2 = deconv2d(deconv1, [self.batch_size, 16, 16, 2*Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv2 = deconv2d(deconv1, [self.batch_size, 16, 16, 2*Cc], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
             deconv2 = tf.nn.relu(tcl.batch_norm(deconv2)) if self.Bn else tf.nn.relu(deconv2)
         with tf.variable_scope("g_deconv3",reuse=None):
-            deconv3 = deconv2d(deconv2, [self.batch_size, 32, 32, Cc], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv3 = deconv2d(deconv2, [self.batch_size, 32, 32, Cc], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
             deconv3 = tf.nn.relu(tcl.batch_norm(deconv3)) if self.Bn else tf.nn.relu(deconv3)
         with tf.variable_scope("g_deconv4",reuse=None):
-            deconv4 = deconv2d(deconv3, [self.batch_size, 64, 64, 3], 5, 5, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv4 = deconv2d(deconv3, [self.batch_size, 64, 64, 3], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
         return tf.tanh(deconv4)
     
     
-    def discriminator(self, x, Cc=128):
+    def discriminator(self, x, Cc=128, f_h=5, f_w=5):
         with tf.variable_scope("d_conv1",reuse=self.DO_SHARE):
-            conv1 = conv2d(x, self.C, Cc, 5, 5, 2, 2, bias=not self.Bn, padding='SAME') # H/2 x W/2
+            conv1 = conv2d(x, self.C, Cc, f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME') # H/2 x W/2
             conv1 = lrelu(conv1)
         with tf.variable_scope("d_conv2",reuse=self.DO_SHARE):
-            conv2 = conv2d(conv1, Cc, 2*Cc, 5, 5, 2, 2, bias=not self.Bn, padding='SAME') # H/4 x W/4
+            conv2 = conv2d(conv1, Cc, 2*Cc, f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME') # H/4 x W/4
             conv2 = lrelu(tcl.batch_norm(conv2)) if self.Bn else lrelu(conv2)
         with tf.variable_scope("d_conv3",reuse=self.DO_SHARE):
-            conv3 = conv2d(conv2, 2*Cc, 4*Cc, 5, 5, 2, 2, bias=not self.Bn, padding='SAME') # H/8 x W/8
+            conv3 = conv2d(conv2, 2*Cc, 4*Cc, f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME') # H/8 x W/8
             conv3 = lrelu(tcl.batch_norm(conv3)) if self.Bn else lrelu(conv3)
         with tf.variable_scope("d_conv4",reuse=self.DO_SHARE):
-            conv4 = conv2d(conv3, 4*Cc, 8*Cc, 5, 5, 2, 2, bias=not self.Bn, padding='SAME') # H/16 x W/16
+            conv4 = conv2d(conv3, 4*Cc, 8*Cc, f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME') # H/16 x W/16
             conv4 = lrelu(tcl.batch_norm(conv4)) if self.Bn else lrelu(conv4)
         with tf.variable_scope("d_conv5",reuse=self.DO_SHARE):
             conv5 = conv2d(conv4, 8*Cc, 1, 4, 4, 1, 1, bias=not self.Bn, padding='VALID')
