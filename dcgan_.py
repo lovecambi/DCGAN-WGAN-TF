@@ -211,7 +211,7 @@ class DCGAN(object):
             conv4 = conv2d(conv3, 4*Cc, 8*Cc, f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME') # H/16 x W/16
             conv4 = lrelu(tcl.batch_norm(conv4)) if self.Bn else lrelu(conv4)
         with tf.variable_scope("d_conv5",reuse=self.DO_SHARE):
-            conv5 = conv2d(conv4, 8*Cc, 1, 4, 4, 1, 1, bias=not self.Bn, padding='VALID')
+            conv5 = conv2d(conv4, 8*Cc, 1, 4, 4, 1, 1, bias=not self.Bn, padding='VALID') # 1 x 1
         return tf.reshape(conv5, [-1, 1])
         
 
