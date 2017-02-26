@@ -1,7 +1,7 @@
 # DCGAN (WGAN)
 TensorFlow 0.12.1  implementation
 
-It currently works well on LSUN for vanilla gan loss.
+It currently works well on LSUN for vanilla gan loss, and converges slow for wgan loss (too small learning rate) :sweat_smile: .
 
 To run WGAN, set 
 ```
@@ -29,4 +29,5 @@ After 1 Epoch without Batch Normalization (but with bias; if no bias, the genera
 
 ## Results of WGAN Loss
 
-Waiting :sweat_smile:
+After 4 Epochs with Batch Normalization:
+![WGAN with BN](https://github.com/lovecambi/DCGAN/blob/master/imgs/WGAN_BN4ep.jpg)
