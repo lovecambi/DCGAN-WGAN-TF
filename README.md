@@ -3,7 +3,7 @@ TensorFlow 0.12.1  implementation
 
 It currently works well on LSUN for vanilla gan loss.
 
-To run WGAN, it is better to set ```f_h=4, f_w=4, Cc=64``` in both generator and discriminator.
+To run WGAN, it is better to set ```d_learningrate=1e-5, g_learningrate=1e-5, z~norm``` and ```f_h=4, f_w=4, Cc=64``` in both generator and discriminator (same setting as the original [torch implementation](https://github.com/martinarjovsky/WassersteinGAN)).
 
 ## Results of GAN Loss
 
