@@ -25,7 +25,7 @@ After 1.5 Epoch with Batch Normalization:
 
 After 1 Epoch without Batch Normalization (but conv and deconv with bias):
 
-![DCGAN no BN](https://github.com/lovecambi/dcgan/blob/master/imgs/dcgan_noBN1ep.jpg)
+![DCGAN no BN](https://github.com/lovecambi/DCGAN/blob/master/imgs/dcgan_noBN1ep.jpg)
 
 ## Results of WGAN Loss
 
