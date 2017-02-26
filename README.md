@@ -3,7 +3,9 @@ TensorFlow 0.12.1  implementation
 
 It currently works well on LSUN for vanilla gan loss.
 
-## Some Results  
+To run WGAN, it is better to set f_h=4, f_w=4, Cc=64 in the generator and discriminator.
+
+## Results of GAN Loss
 
 After 1.5 Epoch with Batch Normalization:
 
