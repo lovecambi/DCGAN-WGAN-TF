@@ -61,11 +61,11 @@ def iterate_minibatches_u(data, batchsize, shuffle=False):
         This function tries to iterate unlabeled data in mini-batch
     """
     if shuffle:
-        indices = np.arange(len(datapath))
+        indices = np.arange(len(data))
         np.random.RandomState(np.random.randint(1,2147462579)).shuffle(indices)
-    for start_idx in range(0, len(datapath) - batchsize + 1, batchsize):
+    for start_idx in range(0, len(data) - batchsize + 1, batchsize):
         if shuffle:
             excerpt = indices[start_idx:start_idx + batchsize]
         else:
             excerpt = slice(start_idx, start_idx + batchsize)
-        yield datapath[excerpt]
+        yield data[excerpt]
