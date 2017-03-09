@@ -58,7 +58,9 @@ def lrelu(x, leaky=0.2):
 
 def iterate_minibatches_u(data, batchsize, shuffle=False):
     """
-        This function tries to iterate unlabeled data in mini-batch
+    This function tries to iterate unlabeled data in mini-batch
+    for batch_data in iterate_minibatches_u(data, batchsize, True):    
+        #processing batch_data
     """
     if shuffle:
         indices = np.arange(len(data))
@@ -69,3 +71,5 @@ def iterate_minibatches_u(data, batchsize, shuffle=False):
         else:
             excerpt = slice(start_idx, start_idx + batchsize)
         yield data[excerpt]
+
+      
