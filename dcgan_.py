@@ -19,7 +19,7 @@ def ganloss(yl, c=0.99):
     input is the logits
     c is soft label
     """
-    return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(yl, c*tf.ones_like(yl)))
+    return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=yl, labels=c*tf.ones_like(yl)))
 
         
 class DCGAN(object):
