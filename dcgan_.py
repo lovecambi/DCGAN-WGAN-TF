@@ -193,7 +193,7 @@ class DCGAN(object):
             deconv3 = deconv2d(deconv2, [self.batch_size, 32, 32, Cc], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
             deconv3 = tf.nn.relu(tcl.batch_norm(deconv3)) if self.Bn else tf.nn.relu(deconv3)
         with tf.variable_scope("g_deconv4",reuse=None):
-            deconv4 = deconv2d(deconv3, [self.batch_size, 64, 64, 3], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
+            deconv4 = deconv2d(deconv3, [self.batch_size, 64, 64, self.C], f_h, f_w, 2, 2, bias=not self.Bn, padding='SAME')
         return tf.tanh(deconv4)
     
     
