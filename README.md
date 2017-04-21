@@ -1,5 +1,5 @@
 # DCGAN (WGAN)
-TensorFlow 0.12.1  implementation
+TensorFlow 1.0 compatible implementation
 
 It currently works well on LSUN for vanilla gan loss, and converges slow for wgan loss (too small learning rate) :sweat_smile: .
 
