@@ -73,7 +73,7 @@ class DCGAN(object):
             self.d_loss = tf.reduce_mean(yl_r - yl_g, axis=0)
             self.g_loss = tf.reduce_mean(yl_g, axis=0)
         else: # Vanilla GAN loss
-            self.d_loss = ganloss(yl_r) + ganloss(yl_g, 0.01)
+            self.d_loss = ganloss(yl_r) + ganloss(yl_g, 0.) # no smooth label for fake data by improved GAN paper
             self.g_loss = ganloss(yl_g)
                     
         t_vars = tf.trainable_variables()
